@@ -1,20 +1,17 @@
 #include "binary_trees.h"
 /**
- * binary_tree_leaves - counts the leaves in a binary tree
+ * binary_tree_balance - finds the balance factor of a binary tree
  * @tree: pointer to the root node of the tree
- * Return: the amount of leaves in the tree
+ * Return: the balance factor
  */
-size_t binary_tree_leaves(const binary_tree_t *tree)
+int binary_tree_balance(const binary_tree_t *tree)
 {
-	size_t leaves = 0;
+	int right, left;
 
 	if (tree == NULL)
-		return (leaves);
+		return (0);
 
-	leaves += binary_tree_leaves(tree->left);
-	leaves += binary_tree_leaves(tree->right);
-	if (tree->left == NULL && tree->right == NULL)
-		leaves += 1;
-
-	return (leaves);
+	left = binary_tree_height(tree->left);
+	right = binary_tree_height(tree->right);
+	return (left - right);
 }
